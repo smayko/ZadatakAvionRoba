@@ -2,6 +2,9 @@ package zadaci;
 
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
+import com.j256.ormlite.table.TableUtils;
+import model.Avion;
+import model.Roba;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -11,6 +14,12 @@ public class Zadatak1KreiranjeTabela {
 
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(Konstante.DATABASE);
+
+            TableUtils.dropTable(connectionSource, Roba.class, true);
+            TableUtils.dropTable(connectionSource, Avion.class, true);
+
+            TableUtils.createTable(connectionSource, Roba.class);
+            TableUtils.createTable(connectionSource, Avion.class);
 
 
             try {
