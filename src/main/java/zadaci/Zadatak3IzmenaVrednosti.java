@@ -20,9 +20,10 @@ public class Zadatak3IzmenaVrednosti {
           List<Roba> roba = robaDao.queryForAll();
           for(Roba r : roba){
               System.out.println("ID: " + r.getId() + "Opis: " + r.getOpis()+ " naziv: " +r.getNaziv());
-              if(r.getOpis().equals("plasticna stolica"));
-              r.setOpis("Drvena Stolica");
-              robaDao.update(r);
+              if(r.getOpis().equals("plasticna stolica")) {
+                  r.setOpis("Drvena Stolica");
+                  robaDao.update(r);
+              }
           }
 
 

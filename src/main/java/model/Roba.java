@@ -14,7 +14,7 @@ public class Roba {
    private String opis;
     @DatabaseField(columnName = POLJE_TEZINA, canBeNull = false)
    private double tezina;
-    @DatabaseField
+    @DatabaseField(foreign = true)
     private Avion avion;
 
    static final String POLJE_NAZIV = "";

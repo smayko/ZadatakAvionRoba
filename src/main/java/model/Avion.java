@@ -1,5 +1,6 @@
 package model;
 
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -7,7 +8,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.util.ArrayList;
 
 @DatabaseTable(tableName = "avion")
-public class Avion {
+public class Avion{
 
     @DatabaseField(columnName = "id", canBeNull = false, generatedId = true)
    private int id;
@@ -16,7 +17,7 @@ public class Avion {
     @DatabaseField(columnName = POLJE_RASPONKRILA, canBeNull = false)
    private int rasponKrila;
     @ForeignCollectionField
-    ArrayList<Roba> roba;
+    ForeignCollection<Roba> roba;
 
    static final String POLJE_OZNAKA ="oznaka";
    static final String POLJE_RASPONKRILA ="raspon krila";
@@ -28,6 +29,7 @@ public class Avion {
         this.oznaka = oznaka;
         this.rasponKrila = rasponKrila;
     }
+
 
     @Override
     public String toString() {
@@ -59,11 +61,11 @@ public class Avion {
         this.rasponKrila = rasponKrila;
     }
 
-    public ArrayList<Roba> getRoba() {
+    public ForeignCollection<Roba> getRoba() {
         return roba;
     }
 
-    public void setRoba(ArrayList<Roba> roba) {
+    public void setRoba(ForeignCollection<Roba> roba) {
         this.roba = roba;
     }
 }
