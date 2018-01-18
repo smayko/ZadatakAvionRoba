@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AvionNit extends Thread {
 
-    static boolean dozvoljenoSletanje;
+    static boolean dozvoljenoSletanje = true;
     Avion avion;
     Object o = new Object();
 
@@ -23,24 +23,31 @@ public class AvionNit extends Thread {
     @Override
     public void run() {
         System.out.println("Pocinju pripreme za avion: " + avion.getId());
+
+        try {
+            sleep((int) Math.random() * 2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         synchronized (o) {
-            try {
-                sleep((int) Math.random() * 2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             if (dozvoljenoSletanje) {
                 System.out.println(avion.getId() + " se sprema za poletanje!");
+                dozvoljenoSletanje = false;
             }
-
+        }
+        if (dozvoljenoSletanje) {
             try {
                 sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            System.out.println("Avion je poleteo " + avion.getId());
         }
+
+
+        dozvoljenoSletanje = true;
+        System.out.println("Avion je poleteo " + avion.getId());
+
     }
 
     public static void main(String[] args) {
@@ -61,7 +68,6 @@ public class AvionNit extends Thread {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
         for (Avion a : avioni) {
             AvionNit nit = new AvionNit(a);
